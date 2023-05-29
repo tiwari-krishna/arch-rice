@@ -1,0 +1,11 @@
+#!/bin/sh
+MOON="$(curl -s wttr.in/Kawasoti?format=%M)"
+Rain="$(curl -s wttr.in/Kawasoti?format=%p)"
+
+if [ "$(echo $Rain | awk '{ print int($1) }')" -gt "0" ]; then
+        icon=""
+else
+        icon=""
+fi
+
+echo "$icon $Rain |  $MOON"

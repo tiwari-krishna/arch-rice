@@ -1,0 +1,15 @@
+window {
+font-size: 15px;
+font-family: Noto Sans Medium;
+color: white;
+background-color: rgba(50,50,50,0.9);
+}
+
+#entry:seleted {
+	background-color: #bbccdd;
+	color: #333333;
+}
+
+#text:selected {
+	color: #333333;
+}

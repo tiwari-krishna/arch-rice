@@ -1,0 +1,11 @@
+#!/bin/bash
+
+path="$HOME/Data/Media/Movies/"
+
+media="$(fd --base-directory $path --full-path "$path" | tofi --prompt-text "Select the Media: ")"
+
+if [ -z "$media" ]; then
+	exit 0
+else
+	setsid -f mpv $path/$media
+fi

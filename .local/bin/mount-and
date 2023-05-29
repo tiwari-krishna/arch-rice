@@ -1,0 +1,3 @@
+#!/bin/sh
+
+jmtpfs $HOME/mnt && notify-send "Mount Successful" "Android Device Mounted"

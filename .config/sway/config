@@ -1,0 +1,277 @@
+# Output configuration
+output * bg $HOME/.cache/wall fill
+
+output LVDS-1 resolution 1366x768 position 0,0
+
+# Autostart
+exec pipewire
+exec mpd
+exec foot -s
+exec wl-clipboard
+exec waybar -c ~/.config/sway/waybar/config -s ~/.config/sway/waybar/style.css
+exec gammastep -P -O 6300
+
+### Idle configuration
+# exec swayidle -w \
+#          timeout 300 'swaylock -f -c 000000' \
+#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+#          before-sleep 'swaylock -f -c 000000'
+
+### Input configuration
+input "2:7:SynPS/2_Synaptics_TouchPad" {
+    dwt enabled
+    tap enabled
+		drag enabled
+    natural_scroll disabled
+    middle_emulation enabled
+}
+
+input "type:keyboard" {
+		xkb_options caps:swapescape
+		xkb_numlock enabled
+}
+
+### Variables
+set $mod Mod4
+set $alt Mod1
+
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+
+set $term footclient
+set $menu exec $(tofi-run)
+
+# Settings
+default_border pixel 2
+default_floating_border pixel 1
+
+smart_borders on
+smart_gaps off
+
+gaps inner 4
+gaps outer 6
+
+font pango:monospace 10
+
+# Still to be worked
+bindsym $mod+z exec clipmenu
+bindsym $mod+Menu exec rofi -show emoji
+
+### Key bindings
+bindsym $mod+equal gaps inner all plus 5
+bindsym $mod+minus gaps inner all minus 5
+bindsym $mod+Shift+equal gaps inner all set 0
+
+bindsym XF86AudioRaiseVolume exec --no-startup-id wpctl set-volume @DEFAULT_AUDIO_SINK@ 3%-
+bindsym XF86AudioLowerVolume exec --no-startup-id wpctl set-volume @DEFAULT_AUDIO_SINK@ 3%+
+bindsym XF86AudioMute exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindsym XF86HomePage exec --no-startup-id browser-launch
+bindsym XF86AudioPrev exec --no-startup-id mpc prev
+bindsym XF86AudioNext exec --no-startup-id mpc next
+bindsym XF86AudioPlay exec --no-startup-id mpc toggle
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5
+bindsym $alt+$mod+equal exec --no-startup-id light -A 5
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5
+bindsym $alt+$mod+minus exec --no-startup-id light -U 5
+bindsym print exec grim ~/Data/screenshots/$(date +%Y-%m-%d-%s).png
+bindsym Shift+print exec grim -g "$(slurp)" ~/Data/screenshots/$(date +%Y-%m-%d-%s).png
+bindsym Control+print exec grim -g "$(slurp)" - | wl-copy
+
+bindsym $mod+i exec grim ~/Data/screenshots/$(date +%Y-%m-%d-%s).png
+bindsym $mod+Shift+i exec grim -g "$(slurp)" ~/Data/screenshots/$(date +%Y-%m-%d-%s).png
+bindsym $mod+Control+i exec grim -g "$(slurp)" - | wl-copy
+
+bindsym $mod+F12 exec recording-menu
+bindsym $mod+Shift+F12 exec killall ffmpeg
+bindsym $mod+F9 exec wshowkeys -a bottom -F "Noto Sans Medium 20"
+bindsym $mod+Shift+F9 exec killall wshowkey
+bindsym $alt+BackSpace exec gromit-mpx
+bindsym $alt+Shift+BackSpace exec killall gromit-mpx
+
+bindsym $alt+apostrophe exec mpc seek 0%
+
+bindsym $alt+Up exec --no-startup-id wpctl set-volume @DEFAULT_AUDIO_SINK@ 3%+
+bindsym $alt+Down exec --no-startup-id wpctl set-volume @DEFAULT_AUDIO_SINK@ 3%-
+bindsym $alt+Shift+Left exec --no-startup-id mpc prev
+bindsym $alt+Shift+Right exec --no-startup-id mpc next
+bindsym $alt+Shift+space exec --no-startup-id mpc toggle
+bindsym $alt+bracketleft exec --no-startup-id mpc seek -10
+bindsym $alt+Shift+bracketleft exec --no-startup-id mpc seek -60
+bindsym $alt+bracketright exec --no-startup-id mpc seek +10
+bindsym $alt+Shift+bracketright exec --no-startup-id mpc seek +60
+bindsym $alt+Right exec --no-startup-id mpc vol +5
+bindsym $alt+Left exec --no-startup-id mpc vol -5
+bindsym $alt+Control+space exec --no-startup-id mpc single
+bindsym $alt+$mod+Return exec --no-startup-id $term -e ncmpcpp
+bindsym $alt+F1 exec --no-startup-id playerctl play-pause
+bindsym $alt+F2 exec --no-startup-id playerctl next
+bindsym $alt+F3 exec --no-startup-id playerctl previous
+bindsym $alt+F4 exec --no-startup-id playerctl stop
+bindsym $alt+Shift+equal exec playerctl position 10+
+bindsym $alt+equal exec playetclt vol 5+
+bindsym $alt+minus exec playerctl vol 5-
+bindsym $alt+Shift+minus exec playerctl position 10-
+
+bindsym $mod+Shift+c exec confedit
+
+bindsym $mod+Control+r exec --no-startup-id webcam-show
+bindsym $alt+w exec --no-startup-id $term -e nmtui
+bindsym $mod+Shift+n exec --no-startup-id $term -e nvim $HOME/.cache/ScratchNote.md
+bindsym $mod+a exec --no-startup-id $term -e lf
+bindsym $mod+v exec --no-startup-id qbittorrent
+bindsym $mod+Shift+v exec --no-startup-id minitube
+bindsym $mod+x exec --no-startup-id swaylock -f -c 000000
+#bindsym $mod+n exec --no-startup-id $term -e newsboat
+bindsym $mod+Shift+e exec --no-startup-id $term -e gotop
+bindsym $mod+w exec --no-startup-id $BROWSER
+bindsym $alt+Shift+w exec --no-startup-id set-wallpaper
+bindsym $mod+Control+v exec --no-startup-id pavucontrol
+#bindsym $mod+m exec --no-startup-id $term -e neomutt
+bindsym $mod+Shift+BackSpace exec power
+bindsym $mod+Shift+g exec gimp
+bindsym $alt+r exec radio-listen
+bindsym $alt+Menu exec radio-listen
+bindsym $mod+Shift+w exec open-bookmarks
+#bindsym $mod+Shift+slash exec browser-launch
+bindsym $mod+Control+w exec web-search
+bindsym $mod+d exec clipgrab
+#bindsym $mod+e exec emacsclient -c
+bindsym $mod+c exec galculator
+bindsym $mod+grave exec alacritty
+bindsym $mod+Shift+grave exec libreoffice
+bindsym $mod+Shift+d exec pcmanfm
+
+bindsym $mod+slash exec mount-drives
+bindsym $mod+Shift+slash exec umount-drives
+bindsym $mod+Control+slash exec mount-and
+bindsym $mod+e exec qr-gen
+bindsym $mod+m exec movie-watch
+
+bindsym $mod+u exec "killall gammastep; gammastep -P -O 4800"
+bindsym $mod+Shift+u exec "killall gammastep; gammastep -P -O 6300"
+
+bindsym $mod+Shift+m exec mpv $(wl-paste)
+bindsym $mod+semicolon exec spellchk
+bindsym $mod+apostrophe exec notify-timedate
+bindsym $mod+Shift+apostrophe exec notify-battery
+bindsym $mod+Control+apostrophe exec notify-wifi
+
+    # Start a terminal
+    bindsym $mod+Return exec $term
+
+    # Kill focused window
+    bindsym $mod+q kill
+
+    # Start your launcher
+    bindsym $mod+space exec $menu
+
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+    # Reload the configuration file
+    bindsym $mod+Control+q reload
+
+    # Exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+q exec swaymsg exit
+#
+# Moving around:
+#
+    # Move your focus around
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+    # Or use $mod+[up|down|left|right]
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    # Move the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+    # Ditto, with arrow keys
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+
+# Workspaces:
+
+    # Switch to workspace
+    bindsym $mod+1 workspace number 1
+    bindsym $mod+2 workspace number 2
+    bindsym $mod+3 workspace number 3
+    bindsym $mod+4 workspace number 4
+    bindsym $mod+5 workspace number 5
+    bindsym $mod+6 workspace number 6
+    bindsym $mod+7 workspace number 7
+    bindsym $mod+8 workspace number 8
+    bindsym $mod+9 workspace number 9
+    bindsym $mod+0 workspace number 10
+
+    # Move focused container to workspace
+    bindsym $mod+Shift+1 move container to workspace number 1
+    bindsym $mod+Shift+2 move container to workspace number 2
+    bindsym $mod+Shift+3 move container to workspace number 3
+    bindsym $mod+Shift+4 move container to workspace number 4
+    bindsym $mod+Shift+5 move container to workspace number 5
+    bindsym $mod+Shift+6 move container to workspace number 6
+    bindsym $mod+Shift+7 move container to workspace number 7
+    bindsym $mod+Shift+8 move container to workspace number 8
+    bindsym $mod+Shift+9 move container to workspace number 9
+    bindsym $mod+Shift+0 move container to workspace number 10
+
+# Layout stuff:
+    bindsym $mod+Shift+p splith
+    bindsym $mod+p splitv
+
+    # Switch the current container between different layout styles
+    bindsym $mod+Control+t layout stacking
+    bindsym $mod+Shift+t layout tabbed
+    bindsym $mod+t layout toggle split
+
+    # Make the current focus fullscreen
+    bindsym $mod+Shift+f fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+f floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    bindsym $mod+y focus mode_toggle
+
+    # Move focus to the parent container
+    bindsym $mod+Shift+y focus parent
+    bindsym $mod+s sticky toggle
+
+    # Move the currently focused window to the scratchpad
+#bindsym $mod+Shift+minus move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+# bindsym $mod+minus scratchpad show
+#
+# Resizing containers:
+#
+mode "resize" {
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+
+    # Ditto, with arrow keys
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"

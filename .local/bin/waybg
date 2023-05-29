@@ -1,0 +1,4 @@
+#!/bin/sh
+
+killall swaybg;
+swaybg -i ~/.cache/wall & exit 0

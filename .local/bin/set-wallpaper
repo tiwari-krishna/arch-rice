@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cp -f $(imv $HOME/Data/Media/wallpapers) $HOME/.cache/wall &&
+killall swaybg;
+swaybg -i ~/.cache/wall & exit 0

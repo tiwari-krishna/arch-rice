@@ -1,0 +1,5 @@
+#!/bin/sh
+
+DISK="$(df -h / | awk '/\//{ printf(" %4s/%s \n", $4, $2) }')"
+
+printf "$DISK"

@@ -1,0 +1,18 @@
+#!/bin/sh
+pipewire & pipewire-pulse & wireplumber &
+
+xwallpaper --stretch $HOME/.cache/wall &
+unclutter --timeout 3 --start-hidden &
+numlockx on &
+clipmenud &
+xcompmgr &
+#dunst &
+#emacs --daemon &
+#xrdb -load $XRESOURCES &
+xclip &
+mpd &
+xrdb -load ~/.config/x11/xresources &
+xmodmap ~/.config/x11/xmodmap &
+xmodmap -e 'clear lock' &
+#sxhkd -c ~/.config/sxhkd/sxhkdrc-other &
+exec dwm

@@ -1,0 +1,17 @@
+#!/bin/sh
+
+LOCATION="Kawasoti"
+
+WEATH="$(curl -s wttr.in/$LOCATION?format=+%C)"
+TEMP="$(curl -s wttr.in/$LOCATION?format=%t)"
+FEEL="$(curl -s wttr.in/$LOCATION?format=%f)"
+
+if [ "$(echo $TEMP | awk '{ print int($1) }')" -gt "30" ]; then
+        icon=""
+elif [ "$(echo $TEMP | awk '{ print int($1) }')" -gt "10" ]; then
+        icon=""
+else
+        icon=""
+fi
+
+echo "$WEATH | $icon $TEMP($FEEL)"

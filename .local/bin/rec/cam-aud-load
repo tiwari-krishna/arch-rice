@@ -1,0 +1,3 @@
+#!/bin/sh
+
+pacmd load-module module-alsa-source source_properties=device.description=DroidCam device=hw:Loopback,1,0

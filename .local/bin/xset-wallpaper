@@ -1,0 +1,4 @@
+#!/bin/sh
+
+cp -f $(sxiv -o -t -r -q $HOME/Data/Media/wallpapers) $HOME/.cache/wall &&
+xwallpaper --stretch $HOME/.cache/wall

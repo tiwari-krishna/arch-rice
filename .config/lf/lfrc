@@ -1,0 +1,91 @@
+# Basic Settings
+#set hidden true
+set shell bash
+set shellopts '-eu'
+set ignorecase true
+
+# Custom Functions
+cmd mkdir ${{
+  printf "Directory Name: "
+  read ans
+  mkdir $ans
+}}
+
+cmd mkfile ${{
+  printf "File Name: "
+  read ans
+  touch $ans && $EDITOR $ans
+}}
+
+cmd del %mv $f ~/.cache/Trash
+
+# Archive bindings
+cmd unarchive ${{
+  case "$f" in
+      *.zip) unzip "$f" ;;
+			*.rar) unrar "$f" ;;
+      *.tar.gz) tar -xzvf "$f" ;;
+      *.tar.bz2) tar -xjvf "$f" ;;
+      *.tar) tar -xvf "$f" ;;
+      *.tar.bz2)   tar xjf "$f"   ;;
+      *.tar.gz)    tar xzf "$f"   ;;
+      *.bz2)       bunzip2 "$f"   ;;
+      *.rar)       unrar x "$f"   ;;
+      *.gz)        gunzip "$f"    ;;
+      *.tar)       tar xf "$f"    ;;
+      *.tbz2)      tar xjf "$f"   ;;
+      *.tgz)       tar xzf "$f"   ;;
+      *.zip)       unzip "$f"     ;;
+      *.Z)         uncompress "$f";;
+      *.7z)        7z x "$f"      ;;
+      *.deb)       ar x "$f"      ;;
+      *.tar.xz)    tar xf "$f"    ;;
+      *.tar.zst)   unzstd "$f"    ;;
+      *)           echo "'$f' cannot be extracted via ex()" ;;
+  esac
+}}
+
+cmd open ${{
+    case $(file --mime-type "$f" -bL) in
+        text/*) $EDITOR "$f";;
+				audio/*) mpv "$f";;
+				application/pdf|application/vnd.djvu|application/epub*) setsid -f zathura "$fx" >/dev/null 2>&1 ;;
+				video/*) setsid mpv "$f" > /dev/null 2 2>&1 & ;;
+				image/x-xcf) setsid -f gimp "$f" >/dev/null 2>&1 ;;
+				image/*) setsid -f imv "$f" >/dev/null 2>&1 ;;
+				application/vnd.openxmlformats-officedocument.wordprocessingml.document|application/vnd.oasis.opendocument.text|application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|application/octet-stream|application/vnd.oasis.opendocument.spreadsheet|application/vnd.oasis.opendocument.spreadsheet-template|application/vnd.openxmlformats-officedocument.presentationml.presentation|application/vnd.oasis.opendocument.presentation-template|application/vnd.oasis.opendocument.presentation|application/vnd.ms-powerpoint|application/vnd.oasis.opendocument.graphics|application/vnd.oasis.opendocument.graphics-template|application/vnd.oasis.opendocument.formula|application/vnd.oasis.opendocument.database) setsid -f libreoffice "$fx" >/dev/null 2>&1 ;;
+        *) for f in $f; do setsid $OPENER "$f" > /dev/null 2> /dev/null & done;;
+    esac 
+}}
+
+# Bindings
+map d
+map r
+map m
+
+map rx unarchive
+map rg $wine "$f"
+
+# Basic Functions
+map . set hidden!
+map dt del
+map dDD delete
+map p paste
+map dd cut
+map yy copy
+map <enter> open
+map R reload
+map mf mkfile
+map md mkdir
+map C clear
+map a rename
+
+map J :updir; set dironly true; down; set dironly false; open
+map K :updir; set dironly true; up; set dironly false; open
+
+# Movement
+map gd cd ~/Downloads
+map gc cd ~/.config
+map gs cd ~/.local/bin
+map gt cd ~/.cache/Trash/
+

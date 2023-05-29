@@ -1,0 +1,10 @@
+#!/bin/sh
+
+light="$(light | awk 'BEGIN {FS="."}{print $1}')"
+
+echo "💡 $light"
+
+case $BLOCK_BUTTON in
+    4) xbacklight -inc 3;;
+    5) xbacklight -dec 3;;
+esac

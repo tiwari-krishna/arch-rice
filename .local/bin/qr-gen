@@ -1,0 +1,7 @@
+#!/bin/sh
+
+txt="$(wl-paste)"
+
+qrencode -t PNG -s 8 -o $HOME/.cache/qr.png $txt
+
+imv $HOME/.cache/qr.png
