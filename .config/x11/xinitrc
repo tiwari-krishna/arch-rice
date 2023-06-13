@@ -1,5 +1,5 @@
 #!/bin/sh
-pipewire & pipewire-pulse & wireplumber &
+pipewire &
 
 xwallpaper --stretch $HOME/.cache/wall &
 unclutter --timeout 3 --start-hidden &
@@ -15,4 +15,4 @@ xrdb -load ~/.config/x11/xresources &
 xmodmap ~/.config/x11/xmodmap &
 xmodmap -e 'clear lock' &
 #sxhkd -c ~/.config/sxhkd/sxhkdrc-other &
-exec dwm
+exec awesome
