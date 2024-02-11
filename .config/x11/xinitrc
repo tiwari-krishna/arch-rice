@@ -1,0 +1,22 @@
+#!/bin/sh
+pipewire &
+
+xwallpaper --stretch $HOME/.cache/wall &
+unclutter --timeout 3 --start-hidden &
+numlockx on &
+clipmenud &
+xcompmgr &
+#emacs --daemon &
+nightshift -P -O 6300 &
+dunst &
+xclip &
+mpd &
+xrdb -load ~/.config/x11/xresources &
+xmodmap ~/.config/x11/xmodmap &
+xmodmap -e 'clear lock' &
+
+transmission-daemon &
+#sxhkd -c ~/.config/sxhkd/sxhkdrc-other &
+
+exec dbus-launch awesome
+#exec startplasma-x11

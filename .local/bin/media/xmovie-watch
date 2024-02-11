@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# Define the directory containing media files
+media_dir=~/Data/Media/Movies
+
+# Check if dmenu and mpv are installed
+command -v dmenu >/dev/null 2>&1 || { echo >&2 "dmenu is required but not installed. Aborting."; exit 1; }
+command -v mpv >/dev/null 2>&1 || { echo >&2 "mpv is required but not installed. Aborting."; exit 1; }
+
+# Change working directory to the media directory
+cd "$media_dir" || { echo >&2 "Unable to change directory to $media_dir. Aborting."; exit 1; }
+
+# Use find to recursively list all media files in the specified directory
+media_files=$(find . -type f \( -iname "*.mp4" -o -iname "*.mkv" -o -iname "*.avi" -o -iname "*.mp3" -o -iname "*.flac" \) | sed 's|^\./||')
+
+# Use dmenu to display the list of media files and get user input
+selected_file=$(echo "$media_files" | dmenu -p "Select a media file:")
+
+# Check if the user selected a file
+if [ -n "$selected_file" ]; then
+    # Use mpv to play the selected file
+    mpv "$selected_file"
+fi

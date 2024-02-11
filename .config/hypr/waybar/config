@@ -1,0 +1,127 @@
+{
+    "layer": "top", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
+    "height": 22, // Waybar height (to be removed for auto height)
+    "spacing": 4, // Gaps between modules (4px)
+
+    // Choose the order of the modules
+    "modules-left": [ "hyprland/workspaces", "hyprland/window"],
+    "modules-right": ["tray", "mpd", "pulseaudio", "network", "backlight", "battery", "clock"],
+
+    //Modules configuration
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": " {icon} ",
+        "format-icons": {
+            "1": "α",
+            "2": "β",
+            "3": "γ",
+            "4": "δ",
+            "5": "ε",
+            "6": "ζ",
+            "7": "η",
+            "8": "θ",
+            "9": "ι",
+            "10": "κ",
+            "urgent": "😵",
+            "focused": "🙂",
+            "default": "😄"
+        }
+    },
+
+		"hyprland/window": {
+    "format": "{}",
+    "separate-outputs": true
+		},
+
+    "mpd": {
+        "format": "🎙️ {stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}",
+        "format-disconnected": "Disconnected 🎙️",
+        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped 🎙️",
+        "unknown-tag": "N/A",
+        "interval": 2,
+        "consume-icons": {
+            "on": "✂️"
+        },
+        "random-icons": {
+            "on": "🔀"
+        },
+        "repeat-icons": {
+            "on": "🔁"
+        },
+        "single-icons": {
+            "on": "🔂"
+        },
+        "state-icons": {
+            "paused": "⏸️",
+            "playing": "⏯️"
+        },
+        "tooltip-format": "MPD (connected)",
+        "tooltip-format-disconnected": "MPD (disconnected)"
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 8
+
+    },
+    "clock": {
+        // "timezone": "America/New_York",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        //"format-alt": "{:%b %d %a %I:%M %p}",
+        "format": "📅 {:%b %d %a  🕛 %I:%M %p}"
+    },
+
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{icon} {percent}%",
+        "format-icons": ["💡"]
+    },
+
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "🔌 {capacity}%",
+        "format-plugged": "🔌 {capacity}%",
+        "format-alt": "{icon} {time}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["🪫", "🔋"]
+    },
+
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "📶 {signalStrength}%",
+        "format-ethernet": "🛞 {ipaddr}/{cidr}",
+        "tooltip-format": "🛞 {ifname} via {gwaddr}",
+        "format-linked": "🛞 {ifname} (No IP)",
+        "format-disconnected": "❗ Disconnected",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{icon} {volume}% {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": "🔇 {icon} {format_source}",
+        "format-muted": "🔇 {format_source}",
+        "format-source": "🎤 {volume}%",
+        "format-source-muted": "🔬",
+        "format-icons": {
+            "headphone": "🎧",
+            "hands-free": "🎧",
+            "headset": "🎧",
+            "phone": "📱",
+            "portable": "📞",
+            "car": "🚗",
+            "default": ["🔈", "🔉", "🔊"]
+        },
+        "on-click": "pavucontrol"
+    },
+}
+

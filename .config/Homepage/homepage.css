@@ -1,0 +1,90 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(-45deg, #B9E49F, #3DA597, #00617A, #003F5F);
+    background-size: 400% 400%;
+		overflow-y: hidden;
+	animation: gradient 8s ease infinite;
+	height: auto;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.Greeting {
+	color: #fff;
+	font-size: 40px;
+	font-weight: 500;
+}
+
+.searchbar {
+	width: 100%;
+	min-height: 30px;
+	max-width: 500px;
+	background: rgba(255, 255, 255, 0.5);
+ 	backdrop-filter: blur(5px);
+	display: flex;
+	align-items: center;
+	border-radius: 20px;
+	padding: 3px 3px;
+}
+
+.searchbar input {
+	background: transparent;
+	flex: 1;
+	font-size: 20px;
+	color: #2b2e26;
+	border-radius: 8px;
+	padding: 4px 4px;
+	outline: none;
+	border: 0;
+	align-items: center;
+}
+
+::placeholder { color: #2b2e26 }
+
+.bookmark-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 80%;
+    margin: 1em 0em;
+}
+
+.bookmark-set{
+    padding: 1em;
+		background-color: rgba(255, 255, 255, .25);  
+ 		backdrop-filter: blur(5px);
+    border-radius: 8px;
+    font-size: .85rem;
+		width: 15em;
+    margin: 0em .5em;
+}
+.bookmark-inner-container {
+		overflow-y: hidden;
+    height: 90%;
+    vertical-align: top;
+}
+.bookmark-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #ededed;
+    margin: 0em 0em .35em 0em;
+}
+.bookmark {
+    text-decoration: none;
+    color: #ededed;
+		font-size: 1rem;
+    display:block;
+    margin: .4em 0em;
+}
+.bookmark:hover {
+    color: #520ceb;
+}

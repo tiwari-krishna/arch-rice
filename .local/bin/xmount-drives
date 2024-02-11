@@ -1,0 +1,8 @@
+#!/bin/sh
+
+drives="$(lsblk -rpo "name,type,size,label,mountpoint,fstype" | grep -v crypto_LUKS | grep 'part\|rom' | sed 's/ /:/g' | awk -F':' '$5==""{printf "%s (%s) %s\n",$1,$3,$4}')"
+
+chosen="$(echo "$drives" | dmenu -p "Which drive to mount?")"
+md="$(echo "$chosen" | awk '{print $1}')"
+
+sudo mount $md $HOME/mnt && $(notify-send "Mounted" "$chosen has been mounted to mnt" || notify-send "mount failed")

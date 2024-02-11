@@ -1,0 +1,4 @@
+#!/bin/sh
+time="$(date '+%I:%M %p')"
+date="$(date '+%b %d %a')"
+notify-send "Timedate Status" "📅 ${date} ⌛ ${time}"

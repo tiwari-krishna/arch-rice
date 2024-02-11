@@ -1,0 +1,38 @@
+#!/bin/sh
+
+brow=$BROWSER
+togo=$(printf YouTube\\nOdysee\\nChess\\nLichess\\nArchWiki\\nGithub\\nGmail\\nReddit\\nFacebook\\nSuckless\\nMessenger\\nSpotify\\nLibrary\\nTorrents | tofi --prompt-text "Where to go?")
+
+case "$togo" in
+        Chess) $brow "https://chess.com/" &
+                exit 0;;
+        Odysee) $brow "https://odysee.com/" &
+                exit 0;;
+        Lichess) $brow "https://lichess.org/" &
+                exit 0;;
+        Github) $brow "https://github.com/tiwari-krishna/" &
+                exit 0;;
+        YouTube) $brow "https://www.youtube.com/" &
+                exit 0;;
+        Reddit) $brow "https://reddit.com/" &
+                exit 0;;
+        ArchWiki) $brow "https://wiki.archlinux.org/" &
+                exit 0;;
+        Wikipedia) $brow "https://en.wikipedia.org/" &
+                exit 0;;
+        Suckless) $brow "https://suckless.org" &
+                exit 0;;
+        Gmail) $brow "https://mail.google.com/" &
+                exit 0;;
+        Facebook) $brow "https://facebook.com/" &
+                exit 0;;
+        Messenger) $brow "https://messenger.com/" &
+                exit 0;;
+        Spotify) $brow "https://open.spotify.com/" &
+                exit 0;;
+        Library) $brow "https://pustakalaya.org/" &
+                exit 0;;
+        Torrents) $brow "https://www.torlock.com/" &
+                exit 0;;
+        *) notify-send "Sorry    " "Something went wrong. Crashed" ;;
+esac

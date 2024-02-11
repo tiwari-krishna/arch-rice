@@ -1,0 +1,15 @@
+#!/bin/sh	
+
+res=$(xrandr | sed -n "s/\s*\([0-9]\+x[0-9]\+\).*\*.*/\1/p")
+opt=$(printf "ScreenCast\\nAudioOnly\\nScreenOnly\\nKillRecording" | dmenu -p "Select Your Option")
+
+case "$opt" in
+	ScreenCast) exec $(ffmpeg -y -f x11grab -framerate 60 -s $res -i $DISPLAY -r 24 -use_wallclock_as_timestamps 1 -f pulse -i default -f alsa -thread_queue_size 1024 -i default -filter_complex amix=inputs=2 -c:v h264 -crf 0 -preset ultrafast -c:a aac $HOME/Rec/SC$(date '+%y%m%d-%H%M-%S').mp4) &
+		exit 0;;
+	AudioOnly) exec $(ffmpeg -f alsa -i default -c:a flac $HOME/Rec/Aud$(date '+%y%m%d-%H%M-%S').flac) &
+		exit 0;;
+	ScreenOnly) exec $(ffmpeg -f x11grab -framerate 30 -s $res -i $DISPLAY -r 24 -c:v h264 -crf 0 -preset ultrafast $HOME/Rec/Vid$(date '+%y%m%d-%H%M-%S').mp4) &
+		exit 0;;
+	KillRecording) killall ffmpeg &
+		exit 0;;
+esac

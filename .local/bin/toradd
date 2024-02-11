@@ -1,0 +1,4 @@
+#!/bin/sh
+
+transmission-remote -a $1 && 
+notify-send "Torrent Added" "New torrent has successfully been added."

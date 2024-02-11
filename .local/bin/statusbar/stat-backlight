@@ -1,0 +1,10 @@
+#!/bin/sh
+
+light="$(brightnessctl i | grep -i current | awk '{print $4}' | sed 's/(//' | sed 's/)//')"
+
+echo " $light"
+
+case $BLOCK_BUTTON in
+    4) brightnessctl -e set 3%+;;
+    5) brightnessctl -e set 3%-;;
+esac

@@ -1,0 +1,19 @@
+#!/bin/sh	
+
+# sudo setcap cap_sys_admin+ep /usr/bin/ffmpeg
+
+res=$(xrandr | sed -n "s/\s*\([0-9]\+x[0-9]\+\).*\*.*/\1/p")
+opt=$(printf "NoDesktopAud\\nScreenCast\\nAudioOnly\\nScreenOnly\\nKillRecording" | tofi --prompt-text "Select Your Option")
+
+case "$opt" in
+	NoDesktopAud) exec $(ffmpeg -y -f pulse -i default -framerate 60 -f kmsgrab -i - -vf 'hwmap=derive_device=vaapi,scale_vaapi=w=1920:h=1080:format=nv12' -c:v h264_vaapi -c:a aac $HOME/Rec/SC$(date '+%y%m%d-%H%M-%S').mp4) &
+		exit 0;;
+	ScreenCast) exec $(ffmpeg -y -f pulse -i default -f alsa -i default -filter_complex amix=inputs=2 -framerate 60 -f kmsgrab -i - -vf 'hwmap=derive_device=vaapi,scale_vaapi=w=1920:h=1080:format=nv12' -c:v h264_vaapi -c:a aac $HOME/Rec/SC$(date '+%y%m%d-%H%M-%S').mp4) &
+		exit 0;;
+	AudioOnly) exec $(ffmpeg -f pulse -i default -c:a flac $HOME/Rec/Aud$(date '+%y%m%d-%H%M-%S').flac) &
+		exit 0;;
+	ScreenOnly) exec $( ffmpeg -y -framerate 60 -f kmsgrab -i - -vf 'hwmap=derive_device=vaapi,scale_vaapi=w=1920:h=1080:format=nv12' -c:v h264_vaapi $HOME/Rec/Vid$(date '+%y%m%d-%H%M-%S').mp4) &
+		exit 0;;
+	KillRecording) killall ffmpeg &
+		exit 0;;
+esac

@@ -1,0 +1,26 @@
+#!/bin/sh
+
+printf " Paste Your Video Link : "
+
+read link
+
+printf " \n --- Options ---- \n "
+printf " 1. Download Audio in MP3 format \n "
+printf " 2. Download Audio in FLAC(Lossless) format \n "
+printf " 3. Download Audio in M4A format \n "
+printf " 4. Download Audio+Video MP4 in 720p \n "
+printf " 5. Download Audio+Video MP4 in 1080p \n \n "
+
+printf "Choose an Option: "
+
+read opt
+
+case "$opt" in
+	1) yt-dlp --extract-audio --embed-thumbnail --audio-format mp3 $link ;;
+	2) yt-dlp --extract-audio --embed-thumbnail --audio-format flac $link ;;
+	3) yt-dlp --extract-audio --embed-thumbnail --audio-format m4a $link ;;
+	4) yt-dlp -f 'bestvideo[height=720][ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio' --embed-subs --merge-output-format mp4 $link ;;
+	5) yt-dlp -f 'bestvideo[height=1080][ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio' --embed-subs --merge-output-format mp4 $link ;;
+esac
+
+echo "File/Files Downloaded Successfully." && exit 0

@@ -1,0 +1,3 @@
+#!/bin/sh
+RAIN="$(curl -s wttr.in/Kawasoti?format="+%p")"
+echo "$RAIN"

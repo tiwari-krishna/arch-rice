@@ -1,0 +1,21 @@
+#!/bin/sh
+
+Capacity="$(cat /sys/class/power_supply/BAT*/capacity)"
+stat="$(cat /sys/class/power_supply/BAT*/status)"
+
+case "$stat" in
+		"Full") icon="FUL" ;;
+		"Discharging") icon="DIS" ;;
+		"Charging") icon="CHG" ;;
+		"Not charging") icon="DIS" ;;
+		"Unknown") icon="UNK" ;;
+		*) exit 1 ;;
+	esac
+
+echo " $icon $Capacity%"
+
+case $BLOCK_BUTTON in
+    1) notify-send "Battery Status" "🔋 $stat at $Capacity%";;
+    4) xbacklight -inc 3;;
+    5) xbacklight -dec 3;;
+esac

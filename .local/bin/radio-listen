@@ -1,0 +1,25 @@
+#!/bin/sh
+
+opt="$(printf Quit\\nKalika\\nRadioNepal\\nMadhyabinduFM\\nHindiSongs\\nUjyaalo\\nAsal-Sathi\\nSongs\\nClassic | tofi --prompt-text "Select a Radio To Play:")"
+
+case "$opt" in
+        Quit) killall mpv; notify-send "Killing Radio" &
+                exit 0;;
+        Kalika) mpv https://liveonlineradio.net/kalika-fm & notify-send "Playing Kalika FM" &
+                exit 1;;
+        RadioNepal) mpv https://liveonlineradio.net/radio-nepal & notify-send "Playing Radio Nepal" &
+                exit 1;;
+        MadhyabinduFM) mpv https://liveonlineradio.net/radio-madhyabindu & notify-send "Playing Radio Madhyabindu" &
+                exit 1;;
+        Ujyaalo) mpv https://liveonlineradio.net/ujyaalo-online & notify-send "Playing Ujyaalo Online" &
+                exit 1;;
+        HindiSongs) mpv https://liveonlineradio.net/fr/bollyhits-radio & notify-send "Playing HindiSongs" &
+                exit 1;;
+        Asal-Sathi) mpv https://liveonlineradio.net/asal-sathi & notify-send "Playing Asal-Sathi" &
+                exit 1;;
+        Songs) mpv https://liveonlineradio.net/bollywood-udit-narayan & notify-send "Playing Songs" &
+                exit 1;;
+        Classic) mpv https://liveonlineradio.net/madhur-sangeet & notify-send "Playing Classic" &
+                exit 1;;
+        *) notify-send "Sorry 🙇🙇" "Radio Not available" ;;
+esac

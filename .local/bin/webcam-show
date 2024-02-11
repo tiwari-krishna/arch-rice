@@ -1,0 +1,3 @@
+#!/bin/sh
+
+mpv --vf=hflip --no-resume-playback --no-input-default-bindings --untimed --no-cache --no-osc --profile=low-latency --input-conf=/dev/null --title=webcam av://v4l2:/dev/video0

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+case "$1" in
+	sel) maim -s $HOME/Data/screenshots/$(date +%Y-%m-%d-%s).png && exit 0 ;;
+	fullscr) maim $HOME/Data/screenshots/$(date +%Y-%m-%d-%s).png && exit 0 ;;
+	cpy) maim -s | xclip -selection clipboard -t image/png && exit 0 ;;
+	*) notify-send "Sorry opt not found" ;;
+esac

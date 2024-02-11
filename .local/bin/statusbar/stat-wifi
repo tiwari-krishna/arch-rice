@@ -1,0 +1,17 @@
+#!/bin/sh
+connec="$(cat /sys/class/net/w*/operstate)"
+ssid="$(nmcli -t -f NAME connection show --active)"
+
+if [ "$connec" = "up" ]; then
+        stat="$(awk '/^\s*w/ { print "", int($3 * 100 / 70) "% " }' /proc/net/wireless)"
+else
+        stat=" Disconnected"
+fi
+
+echo "$stat"
+
+case $BLOCK_BUTTON in
+		1) notify-send "Wifi Status" "Connected to $ssid with $stat" ;;
+    2) $TERMINAL -e nmtui;;
+    3) $TERMINAL -e nmtui;;
+esac

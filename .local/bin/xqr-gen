@@ -1,0 +1,7 @@
+#!/bin/sh
+
+txt="$(xclip -o -rmlastnl -selection clipboard)"
+
+qrencode -t PNG -s 8 -o $HOME/.cache/qr.png $txt
+
+sxiv $HOME/.cache/qr.png

@@ -1,0 +1,27 @@
+#!/bin/sh
+
+seareng="$(printf Searx\\nGoogle\\nDuckduckGo\\nYouTube\\nBrave\\nArchWiki\\nWikipedia\\nUrbanDict\\nGentooWiki | tofi --prompt-text "Select a Search Engine To Search:")"
+term="$(printf "%s" | tofi --prompt-text "Search Terms:")"
+brow="$BROWSER"
+
+case "$seareng" in
+        Searx) $brow "https://searx.be/search?q=$term" &
+                exit 0;;
+        Google) $brow "https://www.google.com/search?q=$term" &
+                exit 0;;
+        DuckduckGo) $brow "https://duckduckgo.com/?q=$term&t=h_&ia=web" &
+                exit 0;;
+        YouTube) $brow "https://www.youtube.com/results?search_query=$term" &
+                exit 0;;
+        Brave) $brow "https://search.brave.com/search?q=$term&source=web" &
+                exit 0;;
+        ArchWiki) $brow "https://wiki.archlinux.org/?search=$term" &
+                exit 0;;
+        Wikipedia) $brow "https://en.wikipedia.org/w/index.php?search=$term&title=Special%3ASearch&fulltext=1&ns0=1" &
+                exit 0;;
+        UrbanDict) $brow "https://www.urbandictionary.com/define.php?term=$term" &
+                exit 0;;
+        GentooWiki) $brow "https://wiki.gentoo.org/index.php?title=Special%3ASearch&search=$term&go=Go" &
+                exit 0;;
+        *) notify-send "Sorry    " "Some Problem Hit. Crashed" ;;
+esac

@@ -1,0 +1,21 @@
+#!/bin/sh
+stat="$(mpc | awk 'FNR == 2 {print $1}')"
+detail="$(mpc current -f "%title% %artist% %file%" | cut -c-20)"
+
+if [ "$stat" = "[paused]" ]; then
+        out=" Paused"
+elif [ "$stat" = "[playing]" ]; then
+        out=" Playing"
+else
+        out=""
+fi
+
+echo "$out"
+
+case $BLOCK_BUTTON in
+	1) mpc toggle -q ;;
+    2) mpc -q vol 60;;
+    3) $TERMINAL -e ncmpcpp;;
+    4) mpc next -q;;
+    5) mpc prev -q;;
+esac

@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# Define the directory containing Book files
+media_dir=~/Data/Media/Books
+
+# Check if tofi and zahutra are installed
+command -v tofi >/dev/null 2>&1 || { echo >&2 "tofi is required but not installed. Aborting."; exit 1; }
+command -v zathura >/dev/null 2>&1 || { echo >&2 "zathura is required but not installed. Aborting."; exit 1; }
+
+# Change working directory to the Books directory
+cd "$media_dir" || { echo >&2 "Unable to change directory to $media_dir. Aborting."; exit 1; }
+
+# Use find to recursively list all Books files in the specified directory
+media_files=$(find . -type f \( -iname "*.pdf" -o -iname "*.epub" -o -iname "*.docx" -o -iname "*.cb" -o -iname "*.odt" \) | sed 's|^\./||')
+
+# Use tofi to display the list of Books files and get user input
+selected_file=$(echo "$media_files" | tofi --prompt-text "Select a Book:")
+
+# Check if the user selected a file
+if [ -n "$selected_file" ]; then
+    # Use zathura to open the selected file
+    zathura "$selected_file"
+fi
